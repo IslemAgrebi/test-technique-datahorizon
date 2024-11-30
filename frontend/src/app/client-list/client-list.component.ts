@@ -17,6 +17,7 @@ export class ClientListComponent {
   totalItems: number = 0;
   sortBy: string = ''; // Column to sort by
   sortDirection: string = 'asc'; // 'asc' or 'desc'
+  isLoading: boolean = true; // Track loading state
 
   constructor(private http: HttpClient) {}
 
@@ -26,10 +27,12 @@ export class ClientListComponent {
 
   fetchClients(): void {
     const url = 'https://retoolapi.dev/HYd96h/data';
+    this.isLoading = true; // Start loading
     this.http.get<any[]>(url).subscribe((data) => {
       this.allClients = data;
       this.totalItems = data.length;
       this.updatePageData();
+      this.isLoading = false; // Stop loading after data is fetched
     });
   }
 

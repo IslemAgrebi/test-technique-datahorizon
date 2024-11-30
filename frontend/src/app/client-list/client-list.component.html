@@ -1,5 +1,9 @@
 <div class="table-container">
-    <table class="table">
+    <div *ngIf="isLoading" class="spinner">
+      <p>Loading ...</p>
+    </div>
+  
+    <table *ngIf="!isLoading" class="table">
       <thead>
         <tr>
           <th>ID</th>
@@ -28,7 +32,7 @@
       </tbody>
     </table>
   
-    <div class="pagination">
+    <div *ngIf="!isLoading" class="pagination">
       <button [disabled]="currentPage === 1" (click)="changePage(currentPage - 1)">Previous</button>
       <span>Page {{ currentPage }} of {{ totalPageCount() }}</span>
       <button [disabled]="currentPage >= totalPageCount()" (click)="changePage(currentPage + 1)">Next</button>
